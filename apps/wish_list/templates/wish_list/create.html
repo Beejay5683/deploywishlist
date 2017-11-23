@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create Item For Wishlist</title>
+</head>
+	<body>
+	<a href="/logout">Logout</a>
+  <a href="/dashboard">Home</a>
+
+	<h2>Make A Wish</h2>
+		<form action='/create' method='POST'>
+        	{% csrf_token %}
+        	<label for="item">Item: <input type="text" name="item" id="item"></label>
+        	<input type="hidden" name="user_id" value="{{ request.session.user }}">
+        	<input type="submit" value="Add your Item">
+      	</form>
+	</body>
+</html>
+
+
+
+
+
+
+

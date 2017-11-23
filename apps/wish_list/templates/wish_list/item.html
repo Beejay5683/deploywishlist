@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Item Information</title>
+</head>
+<body>
+	<a href="/logout">Logout</a>
+	<a href="/dashboard">Home</a>
+
+	<h2>{{ iteminfo.item }}</h2>
+	<hr>
+	<h3>These users also want this item:</h3>
+	{% for i in iteminfo.userWant.all %}
+	<p>{{ i.name }}</p>
+	{% endfor %}
+
+	<p>{{ moreinfo.name }}</p>
+
+</body>
+</html>

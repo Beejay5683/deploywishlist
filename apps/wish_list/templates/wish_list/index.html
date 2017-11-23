@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login/Registration</title>
+  </head>
+  <body>
+    <div class=info>
+      <h1>Register </h1>
+
+      <form action='/register' method='POST'>
+        {% csrf_token %}
+        <label for="name">Name: <input type="text" name="name" id="name"></label>
+        <label for="username">Username: <input type="text" name="username" id="username"></label>
+        <label for="password">Password: <input type="password" name="password" id="password"></label>
+        <label for="confirm_password">Password Confirmation: <input type="password" name="confirm_password" id="confirm_password"></label>
+        <label for="hireDate">Hire Date: <input type="date" name="hireDate" id="hireDate"></label>
+
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="info">
+      <h1>Login</h1>
+
+      <form action='/login' method='POST'>
+        {% csrf_token %}
+        <label for="username">Username: <input type="text" name="username" id="username"></label>
+        <label for="password">Password: <input type="password" name="password" id="password"></label>
+        <input type="submit" value="Submit">
+       </form>
+     </div>
+    <hr>
+    <div id=errors>
+          {% for error in request.session.errors %}
+           <p>{{ error }}</p>
+          {% endfor %}
+
+    </div>
+
+  </body>
+</html>

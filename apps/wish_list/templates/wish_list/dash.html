@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Dashboard</title>
+</head>
+<body>
+	<a href="/logout">Logout</a>
+	<h2>Welcome {{ request.session.name }} </h2>
+	
+	<h3>Your Wishlist:</h3>
+	<table>
+		<thead>
+			<th>Item</th>
+			<th>Created By</th>
+			<th>Date Created</th>
+			<th>Action</th>
+		</thead>
+		
+			
+			{% for i in myItems %}
+		<tr>
+			<td>
+				<form action="/iteminfo" method="post">
+    			{% csrf_token %}
+    				<input type="hidden" name="item_id" value={{i.id}}>
+    				<input type="submit" value="{{i.item}}">
+  				</form>
+  			</td>
+			<td>{{i.listedBy.name}}</td>
+			<td>{{i.created_at }}</td>
+			<td>
+				<form action="/remove" method="post">
+    			{% csrf_token %}
+    				<input type="hidden" name="item_id" value={{i.id}}>
+    				<input type="submit" value="Remove From my Wishlist">
+  				</form>
+			</td>
+		</tr>
+			{% endfor %}
+			{% for i in mylisteditems %}
+		<tr>
+			<td>
+				<form action="/iteminfo" method="post">
+    			{% csrf_token %}
+    				<input type="hidden" name="item_id" value={{i.id}}>
+    				<input type="submit" value="{{i.item}}">
+  				</form>
+			</td>
+			<td>{{i.listedBy.name}}</td>
+			<td>{{i.created_at }}</td>
+			<td>
+				<form action="/delete" method="post">
+    			{% csrf_token %}
+    				<input type="hidden" name="item_id" value={{i.id}}>
+    				<input type="submit" value="Delete Item">
+  				</form>
+			</td>
+		</tr>
+			{% endfor %}
+	</table>
+	<hr>
+	<h3>All Items</h3>
+	<table>
+		<thead>
+			<th>Item</th>
+			<th>Created By</th>
+			<th>Date Created</th>
+			<th>Action</th>
+		</thead>
+
+		{% for i in otherItems %}
+		
+		<tr>
+			<td>
+				<form action="/iteminfo" method="post">
+    			{% csrf_token %}
+    				<input type="hidden" name="item_id" value={{i.id}}>
+    				<input type="submit" value="{{i.item}}">
+  				</form>
+  			</td>
+			<td>{{i.listedBy.name}}</td>
+			<td>{{i.created_at }}</td>
+			<td>
+				<form action="/add" method="post">
+    			{% csrf_token %}
+    				<input type="hidden" name="item_id" value={{i.id}}>
+    				<input type="submit" value="Add to my Wishlist">
+  				</form>
+  			</td>
+		</tr>	
+		{% endfor %}
+
+	</table>
+	
+	<a href="/additem">Add New Item</a>
+
+</body>
+</html>
